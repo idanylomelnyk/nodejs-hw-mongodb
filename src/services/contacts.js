@@ -18,8 +18,9 @@ export const createContact = async (payload) => {
 export const updateContact = async (contactId, payload, options = {}) => {
   const contact = await Contact.findByIdAndUpdate(contactId, payload, {
     new: true,
+    runValidators: true,
     ...options,
-  });
+  }).select('-__v');
 
   return contact;
 };
